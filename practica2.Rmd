@@ -312,6 +312,19 @@ ggplot(data=Dosis.Medicina2, aes(x=Dosis, y=Efectividad, group=Complemento)) +
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio4.pdf``.
 
 ```{r Solucion ejercicio 4}
+load('data/Ejercicio4_Data.Rdata')
+
+str(DatosEjer4)
+
+ggplot(DatosEjer4, aes(x=Fecha, y=Ventas, color=Fabricante)) + geom_point()
+
+ggplot(DatosEjer4, aes(x=Fecha, y=Ventas, color=Fabricante)) + geom_point()+geom_line()
+
+ggplot(DatosEjer4, aes(x=Fecha, y=Ventas, color=Fabricante)) + geom_point()+geom_line(aes(shape=Fabricante))
+
+ggplot(DatosEjer4, aes(x=Fecha, y=Ventas, color=Fabricante)) + geom_point()+geom_line(aes(shape=Fabricante))+labs(title="Ventas mensuales de diferentes compañías tecnológicas")
+
+ggsave('figs/Ejercicio4.pdf')
 
 ```
 
@@ -368,7 +381,11 @@ El fichero ``iceRiver.RData`` contiene información del caudal de dos ríos isla
   * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio5.pdf``.
 
 ```{r Solucion ejercicio 6 }
+rm(list=ls())
+load('data/iceRiver.RData')
+ggplot(ice.river.df,aes(x=time))+geom_line(aes(y=flow.vat),color='red')+geom_line(aes(y=flow.jok),color='blue')+labs(title='Caudales de los ríos islandeses Vatnsdalsa (azul) y Jokulsa Eystri (rojo)',x='Tiempo (años)', y='Caudal (m^3/s)')
 
+ggsave('figs/Ejercicio6.pdf')
 
 ```
 
