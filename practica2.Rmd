@@ -167,6 +167,7 @@ a2
 a3<-a2+ggtitle('Relación entre temperaturas máxima y mínima y probabilidad de lluvia')
 a3
 
+#scale_color_manual(values=c(azul,rosa)) para cambiarles el color
 
 ggsave('figs/Ejercicio1.pdf')
 ```
@@ -180,6 +181,18 @@ ggsave('figs/Ejercicio1.pdf')
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio2.pdf``.
 
 ```{r Solucion ejercicio 2}
+b<-ggplot(ds, aes(x =Temp9am, y = Pressure9am))
+b
+
+b1<-ggplot(ds, aes(x =Temp9am, y = Pressure9am,shape=RainToday))+geom_point()
+b1
+
+b2<-ggplot(ds, aes(x =Temp9am, y = Pressure9am,color=RainToday))+geom_point()
+b2
+
+b3<-ggplot(ds, aes(x =Temp9am, y = Pressure9am,color=RainToday))+geom_point()+labs(tittle='Probabilidad de lluvia según condiciones meteorológicas',x='Temperatura 9AM(ºC)',y='Presión atmossférica 9AM(mb)')
+b3
+
 
 ggsave('figs/Ejercicio2.pdf')
 ```
@@ -196,6 +209,11 @@ ggsave('figs/Ejercicio2.pdf')
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio3.pdf``.
 
 ```{r Solucion ejercicio 3}
+rm(list = ls())
+
+
+
+
 
 ggsave('figs/Ejercicio3.pdf') # se almacena el último gráfico generado
 ```
