@@ -368,8 +368,22 @@ Añadir barras de error a un gráfico de línea.
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio5.pdf``.
 
 ```{r Solucion ejercicio 5}
+load("./data/Experimento.Rdata")
+str(Experimento)
 
+ggplot(Experimento,aes(x=Dosis,y=Altura, shape=Complemento, linetype=Complemento))+geom_line()+geom_point()
 
+ggplot(Experimento,aes(x=Dosis,y=Altura, shape=Complemento, linetype=Complemento))+geom_line()+geom_point()+geom_errorbar(aes(ymin = Altura - Error_Altura,
+                    ymax = Altura + Error_Altura),
+                width = 0.1,
+                position = position_dodge(0.05))
+
+ggplot(Experimento,aes(x=Dosis,y=Altura))+geom_line(aes(linetype=Complemento))+geom_point(aes(shape=Complemento))+geom_errorbar(aes(ymin = Altura - Error_Altura,
+                    ymax = Altura + Error_Altura),
+                width = 0.1,
+                position = position_dodge(0.05))+scale_color_brewer(palette="Reds")
+
+ggsave('figs/Ejercicio5.pdf')
 ```
 
 ### **Ejercicio 6 **
@@ -382,6 +396,8 @@ El fichero ``iceRiver.RData`` contiene información del caudal de dos ríos isla
 
 ```{r Solucion ejercicio 6 }
 rm(list=ls())
+
+library(latex2exp)
 load('data/iceRiver.RData')
 ggplot(ice.river.df,aes(x=time))+geom_line(aes(y=flow.vat),color='red')+geom_line(aes(y=flow.jok),color='blue')+labs(title='Caudales de los ríos islandeses Vatnsdalsa (azul) y Jokulsa Eystri (rojo)',x='Tiempo (años)', y='Caudal (m^3/s)')
 
