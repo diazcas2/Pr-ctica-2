@@ -415,11 +415,18 @@ En esta sección vamos a utilizar **ggplot2** para representar distribuciones de
 * Carga el fichero ``weatherAUS_distributions.RData``.
 * Crea un gráfico en el que estén los boxplots de la variable ``MinTemp`` para cada uno de los años presentes en la variable ``Year`` del dataset.
 * Crea un gráfico en el que estén los gráficos de violín de la variable ``MaxTemp`` para  cada uno de los años presentes en la variable ``Year`` del dataset.  Añade en el mismo gráfico una capa de etiquetas de título (Distribución de temperaturas máximas por año), eje $x$ (Año) y eje $y$ (Temperatura (ºC)). Colorea el interior de los violines según la la variable ``Year``.
-* En el gráfico anterior elimina la leyenda y coloca los años en el eje $x$ a 45 grados de inclinación. Busca información sobre cómo hacer esto.
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio7.pdf``.
 
 ```{r Solucion ejercicio 7}
+load('data/weatherAUS_distributions.RData')
 
+ggplot(ds,aes(x=Year,y=MinTemp))+geom_boxplot()
+ggplot(ds,aes(x=Year,y=MaxTemp))+geom_violin(aes(fill = Year))+labs(title='Distribución de temperaturas máximas por año',x='Año',y='Temperatura (ºC)')+theme(
+    legend.position = "none",                      # Quita la leyenda
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+ggsave('figs/Ejercicio7.pdf')
 ```
 
 ## Histogramas con **ggplot2**
